@@ -17,17 +17,21 @@ Route::get('/', function () {
         'age' => 20
     ]);
 });
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
-/*
-Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function(){
-    Route::get('auth/login', 'Auth\AdminAuthController@getLogin');
-    Route::post('auth/login', 'Auth\AdminAuthController@getLogin');
-    Route::get('auth/logout', 'Auth\AdminAuthController@getLogout');
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-    Route::get('auth/register', 'Auth\AdminAuthController@getRegister');
-    Route::post('auth/register', 'Auth\AdminAuthController@postRegister');
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+    Route::get('/', function (){
+        return 'Welcome';
+    });
+    Route::group(['prefix' => 'u'], function(){
+        Route::get('/', 'Admin\UserController@index');
+    });
 });
-*/
 
 /*
 Route::get('auth/login', 'Auth\AuthController@getLogin');

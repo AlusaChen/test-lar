@@ -33,6 +33,22 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $hidden = ['password', 'remember_token'];
 
+
+    public function set_value_by_key($key, $value)
+    {
+        /*
+        return $this->hasOne('App\Model\Admin\UserMeta', 'admin_id', 'id')->firstOrCreate([
+            'mkey' => $key,
+            'mvalue' => $value
+        ]);
+        */
+    }
+
+    public function get_value_by_key($key)
+    {
+        return $this->hasOne('App\Model\Admin\UserMeta', 'admin_id', 'id')->where('mkey', $key);
+    }
+
     public function metadata()
     {
         return $this->hasMany('App\Model\Admin\UserMeta', 'admin_id', 'id');
