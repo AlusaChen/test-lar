@@ -4,8 +4,9 @@
 
 @section('sidebar')
     @parent
-
-    <p>This is appended to the master sidebar.</p>
+    <li>
+        This is appended to the master sidebar.
+    </li>
 @endsection
 
 @section('content')

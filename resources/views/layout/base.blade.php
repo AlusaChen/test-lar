@@ -9,14 +9,33 @@
     </script>
 </head>
 <body>
+<header>
 <div class="container">
-
-    @section('sidebar')
-        This is the master sidebar.
-    @show
-
-    
-    @yield('content')
+    this is header
 </div>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+           <nav>
+               <ul class="nav">
+                   @section('sidebar')
+                   <li>
+                       This is the master sidebar.
+                   </li>
+                   @show
+               </ul>
+           </nav>
+        </div>
+        <div class="col-md-9">
+            @yield('content')
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="container">
+        this is footer
+    </div>
+</footer>
 </body>
 </html>
