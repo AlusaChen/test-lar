@@ -9,9 +9,17 @@ class UserController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $r = $user->set_value_by_key('job', 'developer');
-        var_dump($r);
+        $d = $user->set_value_by_key('job', 'teacher');
+        echo '<pre>';
+        print_r($d);
+        echo '</pre>';
+        echo $user->name;
+        $mdatas = $user->metadata;
+        foreach($mdatas as $mdata)
+        {
+            echo $mdata->mvalue;
+        }
 
-        return 'user index';
+        return '<br>user index';
     }
 }

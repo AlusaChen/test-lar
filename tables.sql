@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS `meta_admin` (
   `admin_id` int(10) UNSIGNED NOT NULL,
   `mkey` varchar(255)  NOT NULL,
   `mvalue` LONGTEXT NULL ,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `admin_key` (`admin_id`, `mkey`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- post
@@ -38,7 +39,8 @@ CREATE TABLE IF NOT EXISTS `meta_post` (
   `post_id` bigint(20) UNSIGNED NOT NULL,
   `mkey` varchar(255)  NOT NULL,
   `mvalue` LONGTEXT NULL ,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_key` (`post_id`, `mkey`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- terms

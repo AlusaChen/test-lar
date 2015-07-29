@@ -36,12 +36,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function set_value_by_key($key, $value)
     {
-        /*
-        return $this->hasOne('App\Model\Admin\UserMeta', 'admin_id', 'id')->firstOrCreate([
-            'mkey' => $key,
-            'mvalue' => $value
-        ]);
-        */
+        return $this->hasOne('App\Model\Admin\UserMeta', 'admin_id', 'id')->where('mkey', $key)->first();
     }
 
     public function get_value_by_key($key)
