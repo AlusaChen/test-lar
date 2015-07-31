@@ -37,5 +37,7 @@
         this is footer
     </div>
 </footer>
+<script type="text/javascript" src="{{ asset('static/js/jquery.min.js') }}"></script>
+@yield('other_js')
 </body>
 </html>

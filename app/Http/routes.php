@@ -24,13 +24,18 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::'], function(){
     Route::get('/', function (){
         return 'Welcome';
     });
     Route::group(['prefix' => 'u'], function(){
         Route::get('/', 'Admin\UserController@index');
     });
+
+    Route::get('/post', 'Admin\PostController@index');
+    Route::post('/post', 'Admin\PostController@store');
+
+    Route::any('/ueupload', 'Admin\UeUploadController@index');
 });
 
 /*

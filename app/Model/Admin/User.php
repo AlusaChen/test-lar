@@ -8,9 +8,14 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
+use App\Model\MetaData;
+
+
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
     use Authenticatable, CanResetPassword;
+
+    use MetaData;
 
     /**
      * The database table used by the model.
@@ -18,6 +23,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @var string
      */
     protected $table = 'admins';
+
+    protected $meta_model = 'App\Model\Admin\UserMeta';
 
     /**
      * The attributes that are mass assignable.
@@ -31,21 +38,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $hidden = ['password', 'remember_token'];
+    protected $hidden = ['password', 'remember_token', 'deleted_at'];
 
 
-    public function set_value_by_key($key, $value)
-    {
-        return $this->hasOne('App\Model\Admin\UserMeta', 'admin_id', 'id')->where('mkey', $key)->first();
-    }
 
-    public function get_value_by_key($key)
-    {
-        return $this->hasOne('App\Model\Admin\UserMeta', 'admin_id', 'id')->where('mkey', $key);
-    }
-
-    public function metadata()
-    {
-        return $this->hasMany('App\Model\Admin\UserMeta', 'admin_id', 'id');
-    }
 }

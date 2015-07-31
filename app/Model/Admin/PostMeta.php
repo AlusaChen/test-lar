@@ -4,9 +4,9 @@ namespace App\Model\Admin;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserMeta extends Model
+class PostMeta extends Model
 {
-    protected $table = 'meta_admin';
+    protected $table = 'meta_post';
 
     protected $guarded = ['id'];
 
@@ -14,7 +14,7 @@ class UserMeta extends Model
 
     public function user()
     {
-        return $this->hasOne('App\Model\Admin\User', 'id', 'admin_id');
+        return $this->hasOne('App\Model\Admin\User', 'id', 'post_id');
     }
 
 }

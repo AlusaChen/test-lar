@@ -5,3 +5,4 @@ Homestead.yaml
 .idea
 .DS_Store
 _*
+/uploads
