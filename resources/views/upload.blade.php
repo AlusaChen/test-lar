@@ -10,7 +10,7 @@
 @endsection
 
 @section('content')
-    <form action="" method="post" class="form-horizontal">
+    <form action="" method="post" class="form-horizontal" name="upfile">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <div class="form-group {{ $errors->get('title') ?'has-error':'' }}">
             <label for="input-title" class="col-sm-2 control-label">标题</label>

@@ -1,12 +1,6 @@
 <?php
+namespace App\Libraries\Ue;
 
-/**
- * Created by JetBrains PhpStorm.
- * User: taoqili
- * Date: 12-7-18
- * Time: 上午11: 32
- * UEditor编辑器通用上传类
- */
 class Uploader
 {
     private $fileField; //文件域名
@@ -61,7 +55,7 @@ class Uploader
             $this->upFile();
         }
 
-        $this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
+        //$this->stateMap['ERROR_TYPE_NOT_ALLOWED'] = iconv('unicode', 'utf-8', $this->stateMap['ERROR_TYPE_NOT_ALLOWED']);
     }
 
     /**
@@ -280,8 +274,8 @@ class Uploader
 
         //替换随机字符串
         $randNum = rand(1, 10000000000) . rand(1, 10000000000);
-        if (preg_match("/\{rand\:([\d]*)\}/i", $format, $matches)) {
-            $format = preg_replace("/\{rand\:[\d]*\}/i", substr($randNum, 0, $matches[1]), $format);
+        if (preg_match("/\{rand\=>([\d]*)\}/i", $format, $matches)) {
+            $format = preg_replace("/\{rand=>[\d]*\}/i", substr($randNum, 0, $matches[1]), $format);
         }
 
         $ext = $this->getFileExt();
