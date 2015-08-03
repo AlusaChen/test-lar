@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-//use Auth;
+use Auth;
 //use Validator;
 use App\Http\Requests\StoreBlogPostRequest;
 use App\Model\Admin\Post;
@@ -18,18 +18,15 @@ class PostController extends Controller
 
     public function store(StoreBlogPostRequest $request)
     {
-
-        /*
-        $title = Request::input('title');
-        $content = Request::input('content');
+        $title = $request->input('title');
+        $content = $request->input('content');
+        $thumb_img = $request->input('thumb_img');
         $post = Post::create([
             'title' => $title,
             'content' => $content,
+            'thumb_img' => $thumb_img,
             'author' => Auth::user()->id
         ]);
-
-
-        */
         return redirect()->route('admin::');
     }
 }
