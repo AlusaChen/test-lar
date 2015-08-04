@@ -1,21 +1,15 @@
-@extends('layout.base')
+@extends('layout.admin.base')
 
-@section('title', 'Index')
-
-@section('sidebar')
-    @parent
-    <li>
-        This is appended to the master sidebar.
-    </li>
-@endsection
+@section('title', '发布')
 
 @section('content')
-    <form action="" method="post" class="form-horizontal" name="upfile">
+    <form action="{{ url('admin/p/add') }}" method="post" class="form-horizontal" name="upfile">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <input type="hidden" name="id" value="{{ $post->id }}">
         <div class="form-group {{ $errors->get('title') ?'has-error':'' }}">
             <label for="input-title" class="col-sm-2 control-label">标题</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="input-title" name="title" placeholder="标题" value="{{ Input::old('title') }}">
+                <input type="text" class="form-control" id="input-title" name="title" placeholder="标题" value="{{ Input::old('title') ? : $post->title }}">
             </div>
             <div class="col-sm-4">
                 <label class="control-label" for="input-title">{{ $errors->first('title') }}</label>
@@ -24,7 +18,7 @@
         <div class="form-group {{ $errors->get('content') ?'has-error':'' }}">
             <label for="" class="col-sm-2 control-label">内容</label>
             <div class="col-sm-10">
-                <script id="editor" type="text/plain" style="height:500px;" name="content">{{ Input::old('content') }}</script>
+                <script id="editor" type="text/plain" style="height:500px;" name="content">{!! Input::old('content') ? : $post->content !!} </script>
                 <label class="control-label" >{{ $errors->first('content') }}</label>
             </div>
         </div>
@@ -32,7 +26,7 @@
         <div class="form-group {{ $errors->get('thumb_img') ?'has-error':'' }}">
             <label for="" class="col-sm-2 control-label">预览图</label>
             <div class="col-sm-10">
-                <script id="editor_img" type="text/plain" name="thumb_img">{{ Input::old('thumb_img') }}</script>
+                <script id="editor_img" type="text/plain" name="thumb_img">{!! Input::old('thumb_img') ? : $post->thumb_img !!}</script>
                 <label class="control-label" >{{ $errors->first('thumb_img') }}</label>
             </div>
         </div>

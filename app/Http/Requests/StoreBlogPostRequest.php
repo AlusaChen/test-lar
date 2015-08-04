@@ -29,7 +29,7 @@ class StoreBlogPostRequest extends Request
     public function rules()
     {
         return [
-            'title' => 'required|unique:posts|max:255',
+            'title' => 'required|max:255',
             'content' => 'required',
         ];
     }

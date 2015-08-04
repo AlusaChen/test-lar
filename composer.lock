@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "29728e4d73325750c4c743d5f34a8129",
+    "hash": "f9274a26eb34cd50111738f00bdd9af4",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -16,7 +16,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-debugbar/zipball/753106cd1f9c724d05bb48728bc652231174e279",
+                "url": "http://packagist.phpcomposer.com/files/barryvdh/laravel-debugbar/753106cd1f9c724d05bb48728bc652231174e279.zip",
                 "reference": "753106cd1f9c724d05bb48728bc652231174e279",
                 "shasum": ""
             },
@@ -697,7 +697,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/maximebf/php-debugbar/zipball/7b2006e6e095126b5a061ec33fca3d90ea8a8219",
+                "url": "http://packagist.phpcomposer.com/files/maximebf/php-debugbar/7b2006e6e095126b5a061ec33fca3d90ea8a8219.zip",
                 "reference": "7b2006e6e095126b5a061ec33fca3d90ea8a8219",
                 "shasum": ""
             },

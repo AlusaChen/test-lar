@@ -12,19 +12,17 @@
 <body>
 <header>
 <div class="container">
-    this is header
+    <p class="text-center">this is header</p>
 </div>
 </header>
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
            <nav>
                <ul class="nav">
-                   @section('sidebar')
-                   <li>
-                       This is the master sidebar.
-                   </li>
-                   @show
+                   @yield('sidebar')
                </ul>
            </nav>
         </div>
@@ -33,6 +31,9 @@
         </div>
     </div>
 </div>
+
+
+
 <footer>
     <div class="container">
         this is footer

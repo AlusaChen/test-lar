@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `author` int(10) UNSIGNED NOT NULL ,
   `title` varchar(255) NOT NULL,
+  `summary` varchar(1000) NOT NULL,
   `content` LONGTEXT NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
