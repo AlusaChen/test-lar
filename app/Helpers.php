@@ -36,6 +36,33 @@ function str_summary($str, $chars = 10)
     return $str;
 }
 
+
+/**
+ * @param array $arr
+ * @param $key
+ * @param int $i
+ */
+function array_flatten_key(array &$arr, $key, &$i = 0)
+{
+    foreach($arr as $k => &$item)
+    {
+        $i ++;
+        if(!array_key_exists('_k', $item)) $item['_k'] = $i;
+        if(array_key_exists($key, $item))
+        {
+            if(is_array($item[$key])) foreach($item[$key] as $v)
+            {
+                $i ++;
+                if(!array_key_exists('_k', $v)) $v['_k'] = $i;
+                $v['_k'] = $i;
+                $arr[] = $v;
+            }
+            unset($arr[$k][$key]);
+        }
+    }
+    //array_multisort([1,4,2,3],$arr);
+}
+
 /**
  * 数组归类
  * @param $arr

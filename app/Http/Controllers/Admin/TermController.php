@@ -34,8 +34,10 @@ class TermController extends Controller
 
         $terms = Term::get_item_by_type($type);
         $terms = array_group($terms);
-        print_this($terms);
+//        print_this($terms);
 
+        array_flatten_key($terms, 'son');
+        print_this($terms);
         $term = new Term();
         $term->type = $type;
 
@@ -49,8 +51,14 @@ class TermController extends Controller
     public function edit($id)
     {
         $term = Term::find($id);
+
+
+        $terms = Term::get_item_by_type($term->type);
+        $terms = array_group($terms);
+
         return view('term.add', [
-            'term' => $term
+            'term' => $term,
+            'terms' => $terms
         ]);
     }
 
