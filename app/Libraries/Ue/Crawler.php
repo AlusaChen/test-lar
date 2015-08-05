@@ -9,16 +9,15 @@ class Crawler
 
     protected $base64 = 'upload';
 
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
         $this->config = array(
-            "pathFormat" => $CONFIG['catcherPathFormat'],
-            "maxSize" => $CONFIG['catcherMaxSize'],
-            "allowFiles" => $CONFIG['catcherAllowFiles'],
+            "pathFormat" => $config['catcherPathFormat'],
+            "maxSize" => $config['catcherMaxSize'],
+            "allowFiles" => $config['catcherAllowFiles'],
             "oriName" => "remote.png"
         );
-        $this->fieldName = $CONFIG['catcherFieldName'];
+        $this->fieldName = $config['catcherFieldName'];
     }
 
     public function do_handle()

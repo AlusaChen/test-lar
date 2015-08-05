@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Auth;
-use Validator;
 use App\Http\Requests\StoreBlogPostRequest;
 use App\Model\Admin\Post;
 
@@ -14,7 +13,7 @@ class PostController extends Controller
     //文章列表
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(1);
         return view('posts', [
             'posts' => $posts
         ]);

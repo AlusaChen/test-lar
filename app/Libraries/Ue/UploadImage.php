@@ -3,15 +3,15 @@ namespace App\Libraries\Ue;
 
 class UploadImage extends Upload
 {
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
+        parent::__construct($config);
         $this->config = array(
-            "pathFormat" => $CONFIG['imagePathFormat'],
-            "maxSize" => $CONFIG['imageMaxSize'],
-            "allowFiles" => $CONFIG['imageAllowFiles']
+            "pathFormat" => $config['imagePathFormat'],
+            "maxSize" => $config['imageMaxSize'],
+            "allowFiles" => $config['imageAllowFiles']
         );
-        $this->fieldName = $CONFIG['imageFieldName'];
+        $this->fieldName = $config['imageFieldName'];
     }
 
 }

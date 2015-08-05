@@ -3,16 +3,16 @@ namespace App\Libraries\Ue;
 
 class UploadScrawl extends Upload
 {
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
+        parent::__construct($config);
         $this->config = array(
-            "pathFormat" => $CONFIG['scrawlPathFormat'],
-            "maxSize" => $CONFIG['scrawlMaxSize'],
-            "allowFiles" => $CONFIG['scrawlAllowFiles'],
+            "pathFormat" => $config['scrawlPathFormat'],
+            "maxSize" => $config['scrawlMaxSize'],
+            "allowFiles" => $config['scrawlAllowFiles'],
             "oriName" => "scrawl.png"
         );
-        $this->fieldName = $CONFIG['scrawlFieldName'];
+        $this->fieldName = $config['scrawlFieldName'];
         $this->base64 = "base64";
     }
 

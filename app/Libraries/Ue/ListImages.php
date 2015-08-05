@@ -9,12 +9,11 @@ class ListImages
 
     protected $allowFiles = [];
 
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
-        $this->allowFiles = $CONFIG['imageManagerAllowFiles'];
-        $this->listSize = $CONFIG['imageManagerListSize'];
-        $this->path = $CONFIG['imageManagerListPath'];
+        $this->allowFiles = $config['imageManagerAllowFiles'];
+        $this->listSize = $config['imageManagerListSize'];
+        $this->path = $config['imageManagerListPath'];
     }
 
     public function do_handle()

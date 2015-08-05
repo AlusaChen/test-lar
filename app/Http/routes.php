@@ -30,6 +30,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'n
         return view('index');
     });
 
+    Route::get('/test', 'TestController@index');
+
     Route::group(['prefix' => 'u'], function(){
         Route::get('/', 'UserController@index');
     });

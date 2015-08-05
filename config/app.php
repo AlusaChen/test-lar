@@ -144,10 +144,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-       // Barryvdh\Debugbar\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
-        App\Providers\UeHandlerServiceProvider::class
+        //编辑器
+        App\Providers\EditorServiceProvider::class,
 
     ],
 
@@ -197,9 +198,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
-        //'Debugbar'  => Barryvdh\Debugbar\Facade::class,
+        'Debugbar'  => Barryvdh\Debugbar\Facade::class,
 
-        'UeHandler'  => App\Facades\UeHandlerFacade::class
+        //编辑器
+        'Editor'     => App\Facades\EditorFacade::class,
 
     ],
 

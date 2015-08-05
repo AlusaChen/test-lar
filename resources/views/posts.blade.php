@@ -14,4 +14,6 @@
             </dd>
         </dl>
     @endforeach
+
+    {!! $posts->render() !!}
 @endsection

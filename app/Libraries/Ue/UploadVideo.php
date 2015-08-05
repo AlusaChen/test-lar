@@ -3,15 +3,15 @@ namespace App\Libraries\Ue;
 
 class UploadVideo extends Upload
 {
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
+        parent::__construct($config);
         $this->config = array(
-            "pathFormat" => $CONFIG['videoPathFormat'],
-            "maxSize" => $CONFIG['videoMaxSize'],
-            "allowFiles" => $CONFIG['videoAllowFiles']
+            "pathFormat" => $config['videoPathFormat'],
+            "maxSize" => $config['videoMaxSize'],
+            "allowFiles" => $config['videoAllowFiles']
         );
-        $this->fieldName = $CONFIG['videoFieldName'];
+        $this->fieldName = $config['videoFieldName'];
     }
 
 }

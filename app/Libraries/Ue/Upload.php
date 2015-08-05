@@ -9,15 +9,14 @@ class Upload
 
     protected $base64 = 'upload';
 
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
         $this->config = array(
-            "pathFormat" => $CONFIG['filePathFormat'],
-            "maxSize" => $CONFIG['fileMaxSize'],
-            "allowFiles" => $CONFIG['fileAllowFiles']
+            "pathFormat" => $config['filePathFormat'],
+            "maxSize" => $config['fileMaxSize'],
+            "allowFiles" => $config['fileAllowFiles']
         );
-        $this->fieldName = $CONFIG['fileFieldName'];
+        $this->fieldName = $config['fileFieldName'];
     }
 
     public function do_handle()

@@ -9,11 +9,11 @@ class ListFile extends ListImages
 
     protected $allowFiles = [];
 
-    public function __construct()
+    public function __construct($config)
     {
-        $CONFIG = config('ueupload');
-        $this->allowFiles = $CONFIG['fileManagerAllowFiles'];
-        $this->listSize = $CONFIG['fileManagerListSize'];
-        $this->path = $CONFIG['fileManagerListPath'];
+        parent::__construct($config);
+        $this->allowFiles = $config['fileManagerAllowFiles'];
+        $this->listSize = $config['fileManagerListSize'];
+        $this->path = $config['fileManagerListPath'];
     }
 }
