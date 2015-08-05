@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `meta_post` (
 -- terms
 CREATE TABLE IF NOT EXISTS `terms` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `pid` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
   `type` varchar(100)  NOT NULL,
   `name` varchar(255)  NOT NULL,
   `cname` varchar(255)  NOT NULL,

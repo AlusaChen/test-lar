@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Http\Requests\StoreBlogPostRequest;
-use App\Model\Admin\Post;
+use App\Model\Post;
 
 
 class PostController extends Controller
@@ -14,7 +14,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(1);
-        return view('posts', [
+        return view('post.list', [
             'posts' => $posts
         ]);
     }
@@ -23,7 +23,7 @@ class PostController extends Controller
     public function view($id)
     {
         $post = Post::find($id);
-        return view('post', [
+        return view('post.view', [
             'post' => $post
         ]);
     }
@@ -32,7 +32,7 @@ class PostController extends Controller
     public function add()
     {
         $post = new Post();
-        return view('add', [
+        return view('post.add', [
             'post' => $post
         ]);
     }
@@ -41,7 +41,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('add', [
+        return view('post.add', [
             'post' => $post
         ]);
     }

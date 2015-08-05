@@ -32,16 +32,27 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'n
 
     Route::get('/test', 'TestController@index');
 
+    //管理员
     Route::group(['prefix' => 'u'], function(){
         Route::get('/', 'UserController@index');
     });
 
+    //文章
     Route::group(['prefix' => 'p', 'as' => 'post'], function(){
         Route::get('/', 'PostController@index');
         Route::get('view/{id}', 'PostController@view');
         Route::get('edit/{id}', 'PostController@edit');
         Route::get('/add', 'PostController@add');
         Route::post('/add', 'PostController@store');
+    });
+
+    //term
+    Route::group(['prefix' => 't', 'as' => 'term'], function(){
+        Route::get('/{type?}', 'TermController@index');
+        Route::get('view/{id}', 'TermController@view');
+        Route::get('edit/{id}', 'TermController@edit');
+        Route::get('/add/{type}', 'TermController@add');
+        Route::post('/add', 'TermController@store');
     });
 
     Route::any('/ueupload', 'UeUploadController@index');
