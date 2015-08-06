@@ -39,7 +39,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'n
 
     //文章
     Route::group(['prefix' => 'p', 'as' => 'post'], function(){
-        Route::get('/', 'PostController@index');
+        Route::get('/{category?}', 'PostController@index');
         Route::get('view/{id}', 'PostController@view');
         Route::get('edit/{id}', 'PostController@edit');
         Route::get('/add', 'PostController@add');

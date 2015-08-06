@@ -147,16 +147,19 @@ function array_trees_flatten(&$arr, &$ret = [], &$ptrees = [], $group_key = 'id'
     {
         foreach($arr as $v)
         {
-            $pid = $v[$parent_key];
-            $id = $v[$group_key];
-            $ptrees[$id] = (array_key_exists($pid, $ptrees) ? $ptrees[$pid].'-': '').$pid;
-            if(array_key_exists($group_name, $v))
+            if(is_array($v))
             {
-                array_trees_flatten($v['son'], $ret, $ptrees);
-                unset($v[$group_name]);
+                $pid = $v[$parent_key];
+                $id = $v[$group_key];
+                $ptrees[$id] = (array_key_exists($pid, $ptrees) ? $ptrees[$pid].'-': '').$pid;
+                if(array_key_exists($group_name, $v))
+                {
+                    array_trees_flatten($v['son'], $ret, $ptrees);
+                    unset($v[$group_name]);
+                }
+                $v['ptree'] = $ptrees[$v[$group_key]];
+                array_unshift($ret, $v);
             }
-            $v['ptree'] = $ptrees[$v[$group_key]];
-            array_unshift($ret, $v);
         }
     }
 }

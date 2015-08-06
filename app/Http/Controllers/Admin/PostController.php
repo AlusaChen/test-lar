@@ -11,9 +11,9 @@ use App\Model\Post;
 class PostController extends Controller
 {
     //文章列表
-    public function index()
+    public function index($category = '')
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(5);
+        $posts = Post::list_paginate($category);
         return view('post.list', [
             'posts' => $posts
         ]);
@@ -40,6 +40,7 @@ class PostController extends Controller
             'post' => $post,
             'categories' => $categories,
             'tags' => $tags,
+            'relations' => [],
         ]);
     }
 
@@ -90,7 +91,7 @@ class PostController extends Controller
 
         $relations = [];
         $relations[] = ['term_id' => $category];
-        foreach($tags as $tag)
+        if($tags)foreach($tags as $tag)
         {
             $relations[] = ['term_id' => $tag];
         }
