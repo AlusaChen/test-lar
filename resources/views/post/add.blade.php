@@ -6,6 +6,35 @@
     <form action="{{ url('admin/p/add') }}" method="post" class="form-horizontal" name="upfile">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <input type="hidden" name="id" value="{{ $post->id }}">
+
+        <div class="form-group {{ $errors->get('category') ?'has-error':'' }}">
+            <label for="input-category" class="col-sm-2 control-label">分类</label>
+            <div class="col-sm-6">
+                <select class="form-control" id="input-category" name="category">
+                    @foreach($categories as $category)
+                        <option value="{{ $category['id'] }}" {{ in_array($category['id'], $relations) ? 'selected':'' }}>{{ str_replace('_','&nbsp;&nbsp;&nbsp;&nbsp;',str_pad('', substr_count($category['ptree'], '-'), '_')).$category['cname'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label" for="input-category">{{ $errors->first('category') }}</label>
+            </div>
+        </div>
+
+        <div class="form-group {{ $errors->get('category') ?'has-error':'' }}">
+            <label class="col-sm-2 control-label">标签</label>
+            <div class="col-sm-6">
+                @foreach($tags as $tag)
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="tags[]"  value="{{ $tag['id'] }}" {{ in_array($tag['id'], $relations) ? 'checked':'' }}> {{ $tag['cname'] }}
+                    </label>
+                @endforeach
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label" for="input-tag">{{ $errors->first('tag') }}</label>
+            </div>
+        </div>
+
         <div class="form-group {{ $errors->get('title') ?'has-error':'' }}">
             <label for="input-title" class="col-sm-2 control-label">标题</label>
             <div class="col-sm-6">

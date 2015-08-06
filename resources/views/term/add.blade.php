@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="form-group {{ $errors->get('name') ?'has-error':'' }}">
+        <div class="form-group {{ $errors->get('name') ? 'has-error' : '' }}">
             <label for="input-name" class="col-sm-2 control-label">Name</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" id="input-name" name="name" placeholder="Name" value="{{ Input::old('name') ? : $term->name }}">

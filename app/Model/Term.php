@@ -21,21 +21,26 @@ class Term extends Model
     /**
      * 获取指定类别
      * @param $type
-     * @return mixed
+     * @param int $top_id
+     * @param int $bottom_id
+     * @return array
      */
-    public static function get_item_by_type($type)
+    public static function get_item_by_type($type, $top_id = 0, $bottom_id = -1)
     {
         if($type)
         {
-            return self::where('type', $type)
+            $terms =  self::where('type', $type)
                 ->orderBy('id', 'desc')
                 ->get()->toArray();
         }
         else
         {
-            return self::orderBy('id', 'desc')
+            $terms =  self::orderBy('id', 'desc')
             ->get()->toArray();
         }
 
+        $terms = array_assort($terms, 'id', 'pid', $top_id, $bottom_id);
+
+        return $terms;
     }
 }

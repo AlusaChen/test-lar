@@ -2,7 +2,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Arr;
 use Validator;
 use Request;
 use App\Model\Term;
@@ -13,7 +12,6 @@ class TermController extends Controller
     public function index($type = '')
     {
         $terms = Term::get_item_by_type($type);
-        $terms = array_assort($terms);
 
         return view('term.list', [
             'terms' => $terms
@@ -34,7 +32,6 @@ class TermController extends Controller
     {
         if(!in_array($type, array_keys(config('terms')))) return redirect('admin/');
         $terms = Term::get_item_by_type($type);
-        $terms = array_assort($terms);
         $term = new Term();
         $term->type = $type;
 
@@ -49,8 +46,7 @@ class TermController extends Controller
     {
         $term = Term::find($id);
 
-        $terms = Term::get_item_by_type($term->type);
-        $terms = array_assort($terms, 'id', 'pid', 0, $id);
+        $terms = Term::get_item_by_type($term->type, 0, $id);
 
         return view('term.add', [
             'term' => $term,
@@ -104,6 +100,6 @@ class TermController extends Controller
 
         $term->save();
 
-        return redirect()->action('Admin\TermController@index');
+        return redirect()->action('Admin\TermController@index', ['type' => $type]);
     }
 }

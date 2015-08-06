@@ -10,5 +10,10 @@
         <li><a href="{{ url('admin/t/category') }}">列表</a> </li>
         <li><a href="{{ url('admin/t/add/category') }}">添加</a> </li>
     </ul>
+    <li><a href="#">标签</a> </li>
+    <ul>
+        <li><a href="{{ url('admin/t/tag') }}">列表</a> </li>
+        <li><a href="{{ url('admin/t/add/tag') }}">添加</a> </li>
+    </ul>
     <li><a href="{{ url('admin/u') }}">管理员</a> </li>
 @endsection
