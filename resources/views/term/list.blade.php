@@ -12,12 +12,12 @@
         <tbody>
         @foreach($terms as $term)
         <tr>
-            <td>{{ $term->id }}</td>
-            <td>{{ $term->type }}</td>
-            <td>{{ $term->name }}</td>
-            <td>{{ $term->cname }}</td>
+            <td>{{ $term['id'] }}</td>
+            <td>{{ $term['type'] }}</td>
+            <td>{{ $term['name'] }}</td>
+            <td>{{ str_replace('_','&nbsp;&nbsp;&nbsp;&nbsp;',str_pad('', substr_count($term['ptree'], '-'), '_')).$term['cname'] }}</td>
             <td>
-                <a href="{{ url('admin/t/edit/'.$term->id) }}">编辑</a>
+                <a href="{{ url('admin/t/edit/'.$term['id']) }}">编辑</a>
                 <a href="">查看</a>
             </td>
         </tr>
@@ -25,5 +25,4 @@
         </tbody>
     </table>
 
-    {!! $terms->render() !!}
 @endsection

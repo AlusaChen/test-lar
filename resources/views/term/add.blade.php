@@ -14,7 +14,7 @@
                 <select class="form-control" id="input-pid" name="pid">
                     <option>无</option>
                     @foreach($terms as $item)
-                        <option value="{{ $item['id'] }}">{{ $item['cname'] }}</option>
+                        <option value="{{ $item['id'] }}" {{ ($item['id'] == $term->pid)?'selected':'' }}>{{ str_replace('_','&nbsp;&nbsp;&nbsp;&nbsp;',str_pad('', substr_count($item['ptree'], '-'), '_')).$item['cname'] }}</option>
                     @endforeach
                 </select>
             </div>

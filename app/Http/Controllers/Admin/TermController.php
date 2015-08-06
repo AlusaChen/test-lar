@@ -12,7 +12,9 @@ class TermController extends Controller
     //文章列表
     public function index($type = '')
     {
-        $terms = Term::paginate(1);
+        $terms = Term::get_item_by_type($type);
+        $terms = array_assort($terms);
+
         return view('term.list', [
             'terms' => $terms
         ]);
@@ -31,13 +33,8 @@ class TermController extends Controller
     public function add($type)
     {
         if(!in_array($type, array_keys(config('terms')))) return redirect('admin/');
-
         $terms = Term::get_item_by_type($type);
-        $terms = array_group($terms);
-//        print_this($terms);
-
-        array_flatten_key($terms, 'son');
-        print_this($terms);
+        $terms = array_assort($terms);
         $term = new Term();
         $term->type = $type;
 
@@ -52,9 +49,8 @@ class TermController extends Controller
     {
         $term = Term::find($id);
 
-
         $terms = Term::get_item_by_type($term->type);
-        $terms = array_group($terms);
+        $terms = array_assort($terms, 'id', 'pid', 0, $id);
 
         return view('term.add', [
             'term' => $term,
@@ -76,23 +72,32 @@ class TermController extends Controller
         }
 
         $id = (int)Request::input('id');
-        if($id)
-        {
-            $term = Term::find($id);
-        }
-        else
-        {
-            $term = new Term();
-        }
-
         $pid = (int)Request::input('pid');
         $type = Request::input('type');
         $name = Request::input('name');
         $cname = Request::input('cname');
         $desc = Request::input('desc');
 
+        if($id)
+        {
+            $term = Term::find($id);
+
+            $terms = Term::get_item_by_type($term->type);
+            $terms = array_assort($terms, 'id', 'pid', 0, $id);
+
+            if($pid && $pid != $term->pid && !in_array($pid, array_keys($terms)))
+            {
+                $validator->errors()->add('type', '类别不正确');
+                return back()->withErrors($validator)->withInput();
+            }
+        }
+        else
+        {
+            $term = new Term();
+            $term->type = $type;
+        }
+
         $term->pid = $pid;
-        $term->type = $type;
         $term->name = $name;
         $term->cname = $cname;
         $term->desc = $desc;

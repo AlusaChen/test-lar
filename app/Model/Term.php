@@ -3,7 +3,6 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Arr;
 
 class Term extends Model
 {
@@ -17,7 +16,7 @@ class Term extends Model
 
     protected $guarded = ['id'];
 
-    //protected $hidden = ['create_at', 'deleted_at'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     /**
      * 获取指定类别
@@ -26,6 +25,17 @@ class Term extends Model
      */
     public static function get_item_by_type($type)
     {
-        return self::select('id', 'pid', 'cname')->where('type', $type)->get()->toArray();
+        if($type)
+        {
+            return self::where('type', $type)
+                ->orderBy('id', 'desc')
+                ->get()->toArray();
+        }
+        else
+        {
+            return self::orderBy('id', 'desc')
+            ->get()->toArray();
+        }
+
     }
 }

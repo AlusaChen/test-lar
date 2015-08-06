@@ -37,31 +37,6 @@ function str_summary($str, $chars = 10)
 }
 
 
-/**
- * @param array $arr
- * @param $key
- * @param int $i
- */
-function array_flatten_key(array &$arr, $key, &$i = 0)
-{
-    foreach($arr as $k => &$item)
-    {
-        $i ++;
-        if(!array_key_exists('_k', $item)) $item['_k'] = $i;
-        if(array_key_exists($key, $item))
-        {
-            if(is_array($item[$key])) foreach($item[$key] as $v)
-            {
-                $i ++;
-                if(!array_key_exists('_k', $v)) $v['_k'] = $i;
-                $v['_k'] = $i;
-                $arr[] = $v;
-            }
-            unset($arr[$k][$key]);
-        }
-    }
-    //array_multisort([1,4,2,3],$arr);
-}
 
 /**
  * 数组归类
@@ -147,14 +122,75 @@ function array_flatten_key(array &$arr, $key, &$i = 0)
 
  *
  */
-function array_group($arr, $group_key = 'id', $parent_key = 'pid', $top_key = 0, $group_name = 'son')
+function array_trees($arr, $group_key = 'id', $parent_key = 'pid', $top_key = 0, $group_name = 'son')
 {
     $arr = array_combine(array_column($arr,$group_key), $arr);
     foreach($arr as $k => $v)
     {
         $arr[$v[$parent_key]][$group_name][$k] = &$arr[$k];
     }
-    return isset($arr[$top_key][$group_name]) ? $arr[$top_key][$group_name] : array();
+    $ret = isset($arr[$top_key][$group_name]) ? $arr[$top_key][$group_name] : array();
+    return $ret;
+}
+
+/**
+ * 展开数组归类
+ * @param $arr
+ * @param string $key
+ * @param array $ret
+ * @param int $i
+ * @return array
+ */
+function array_trees_flatten(&$arr, &$ret = [], &$ptrees = [], $group_key = 'id', $parent_key = 'pid', $group_name = 'son')
+{
+    if(is_array($arr))
+    {
+        foreach($arr as $v)
+        {
+            $pid = $v[$parent_key];
+            $id = $v[$group_key];
+            $ptrees[$id] = (array_key_exists($pid, $ptrees) ? $ptrees[$pid].'-': '').$pid;
+            if(array_key_exists($group_name, $v))
+            {
+                array_trees_flatten($v['son'], $ret, $ptrees);
+                unset($v[$group_name]);
+            }
+            $v['ptree'] = $ptrees[$v[$group_key]];
+            array_unshift($ret, $v);
+        }
+    }
+}
+
+/**
+ * 分类树
+ * @param $arr
+ * @param string $group_key
+ * @param string $parent_key
+ * @param int $top_key
+ * @return array
+ */
+function array_assort($arr, $group_key = 'id', $parent_key = 'pid', $top_key = 0, $bottom_key = -1)
+{
+    $arr = array_trees($arr, $group_key, $parent_key, $top_key);
+    $ret = $ptrees = [];
+    array_trees_flatten($arr, $ret, $ptrees, $group_key, $parent_key);
+
+    $ids = array_column($ret, $group_key);
+    $ret = array_combine($ids, $ret);
+
+
+    if($bottom_key > 0 && array_key_exists($bottom_key, $ret))
+    {
+        $bottom_tree = $ret[$bottom_key]['ptree'];
+        foreach($ret as $k => $item)
+        {
+            if($k == $bottom_key || strpos($item['ptree'], $bottom_tree.'-') !== false)
+            {
+                unset($ret[$k]);
+            }
+        }
+    }
+    return $ret;
 }
 
 /**
