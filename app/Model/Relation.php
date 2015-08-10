@@ -13,9 +13,4 @@ class Relation extends Model
 
     protected $fillable = ['object_id', 'term_id', 'order'];
 
-
-    public function posts()
-    {
-        return $this->hasManyThrough('App\Model\Post', 'App\Model\Term', 'term_id', 'object_id');
-    }
 }

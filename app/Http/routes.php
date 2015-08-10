@@ -35,15 +35,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'n
     //管理员
     Route::group(['prefix' => 'u'], function(){
         Route::get('/', 'UserController@index');
+        Route::get('/add', 'UserController@add');
+        Route::post('/add', 'UserController@store');
     });
 
     //文章
     Route::group(['prefix' => 'p', 'as' => 'post'], function(){
-        Route::get('/{category?}', 'PostController@index');
         Route::get('view/{id}', 'PostController@view');
         Route::get('edit/{id}', 'PostController@edit');
         Route::get('/add', 'PostController@add');
         Route::post('/add', 'PostController@store');
+        Route::get('/{category?}', 'PostController@index')
+            ->where('category', '[0-9]+');
     });
 
     //term

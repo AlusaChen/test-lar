@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Auth;
+use App\Model\Admin\User;
 
 class UserController extends Controller
 {
@@ -10,5 +10,20 @@ class UserController extends Controller
     {
 
         return '<br>user index';
+    }
+
+
+
+    public function add()
+    {
+        return view('user.add', [
+        ]);
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        return view('user.add', [
+        ]);
     }
 }
