@@ -58,6 +58,15 @@ CREATE TABLE IF NOT EXISTS `terms` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS `meta_terms` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `term_id` bigint(20) UNSIGNED NOT NULL,
+  `mkey` varchar(255)  NOT NULL,
+  `mvalue` LONGTEXT NULL ,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `post_key` (`term_id`, `mkey`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- relations
 CREATE TABLE IF NOT EXISTS `relations` (
   `object_id` bigint(20) UNSIGNED NOT NULL,
