@@ -24,7 +24,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => ['auth', 'permission']], function(){
 
     Route::get('/', function (){
         return view('index');

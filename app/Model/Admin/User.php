@@ -41,5 +41,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     protected $hidden = ['password', 'remember_token', 'deleted_at'];
 
 
+    public function hasRole($role)
+    {
+        return true;
+    }
 
 }

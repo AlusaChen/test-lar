@@ -15,6 +15,12 @@
         <li><a href="{{ url('admin/t/tag') }}">列表</a> </li>
         <li><a href="{{ url('admin/t/add/tag') }}">添加</a> </li>
     </ul>
+    <li><a href="#">权限</a> </li>
+    <ul>
+        <li><a href="{{ url('admin/t/permission') }}">列表</a> </li>
+        <li><a href="{{ url('admin/t/add/permission') }}">添加</a> </li>
+    </ul>
+
     <li><a href="#">角色</a> </li>
     <ul>
         <li><a href="{{ url('admin/t/role') }}">列表</a> </li>
