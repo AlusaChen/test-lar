@@ -24,7 +24,7 @@ Route::get('auth/logout', 'Auth\AuthController@getLogout');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'namespace' => 'Admin'], function(){
+Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin'], function(){
 
     Route::get('/', function (){
         return view('index');
@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'n
         Route::get('/', 'UserController@index');
         Route::get('/add', 'UserController@add');
         Route::post('/add', 'UserController@store');
+        Route::get('edit/{id}', 'UserController@edit');
     });
 
     //文章
@@ -45,17 +46,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth', 'as' => 'admin::', 'n
         Route::get('edit/{id}', 'PostController@edit');
         Route::get('/add', 'PostController@add');
         Route::post('/add', 'PostController@store');
-        Route::get('/{category?}', 'PostController@index')
-            ->where('category', '[0-9]+');
+        Route::get('/{category?}', 'PostController@index');
     });
 
     //term
     Route::group(['prefix' => 't', 'as' => 'term'], function(){
-        Route::get('/{type?}', 'TermController@index');
         Route::get('view/{id}', 'TermController@view');
         Route::get('edit/{id}', 'TermController@edit');
         Route::get('/add/{type}', 'TermController@add');
         Route::post('/add', 'TermController@store');
+        Route::get('/{type?}', 'TermController@index');
     });
 
     Route::any('/ueupload', 'UeUploadController@index');

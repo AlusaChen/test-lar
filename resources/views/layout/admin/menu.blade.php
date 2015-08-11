@@ -20,5 +20,11 @@
         <li><a href="{{ url('admin/t/role') }}">列表</a> </li>
         <li><a href="{{ url('admin/t/add/role') }}">添加</a> </li>
     </ul>
-    <li><a href="{{ url('admin/u') }}">管理员</a> </li>
+
+
+    <li><a href="#">管理员</a> </li>
+    <ul>
+        <li><a href="{{ url('admin/u/') }}">列表</a> </li>
+        <li><a href="{{ url('admin/u/add') }}">添加</a> </li>
+    </ul>
 @endsection
