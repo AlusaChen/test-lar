@@ -44,4 +44,17 @@ class Term extends Model
         return $terms;
     }
 
+    public static function get_all_permission($type = 'permission')
+    {
+        $permissions = self::select('id', 'name')
+            ->where('type', $type)
+            ->orderBy('id', 'desc')
+            ->get()->toArray();
+
+        $ids = array_column($permissions, 'id');
+        $names = array_column($permissions, 'name');
+        $permissions = array_combine($names, $ids);
+        return $permissions;
+    }
+
 }

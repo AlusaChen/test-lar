@@ -26,24 +26,25 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'middleware' => ['auth', 'permission']], function(){
 
-    Route::get('/', function (){
-        return view('index');
-    });
+    Route::get('/', 'WelcomeController@index');
 
     Route::get('/test', 'TestController@index');
 
     //管理员
-    Route::group(['prefix' => 'u'], function(){
+    Route::group(['prefix' => 'u', 'as' => 'user'], function(){
         Route::get('/', 'UserController@index');
         Route::get('/add', 'UserController@add');
         Route::post('/add', 'UserController@store');
-        Route::get('edit/{id}', 'UserController@edit');
+        Route::get('/edit/{id}', 'UserController@edit');
+
+        Route::get('/perm/{uid}', 'UserController@perm');
+        Route::post('/perm/{uid}', 'UserController@set_perm');
     });
 
     //文章
     Route::group(['prefix' => 'p', 'as' => 'post'], function(){
-        Route::get('view/{id}', 'PostController@view');
-        Route::get('edit/{id}', 'PostController@edit');
+        Route::get('/view/{id}', 'PostController@view');
+        Route::get('/edit/{id}', 'PostController@edit');
         Route::get('/add', 'PostController@add');
         Route::post('/add', 'PostController@store');
         Route::get('/{category?}', 'PostController@index');
@@ -51,12 +52,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'm
 
     //term
     Route::group(['prefix' => 't', 'as' => 'term'], function(){
-        Route::get('view/{id}', 'TermController@view');
-        Route::get('edit/{id}', 'TermController@edit');
+        Route::get('/view/{id}', 'TermController@view');
+        Route::get('/edit/{id}', 'TermController@edit');
         Route::get('/add/{type}', 'TermController@add');
         Route::post('/add', 'TermController@store');
         Route::get('/{type?}', 'TermController@index');
     });
+
+    //permission
+    Route::get('/perm/{uid?}', 'PermController@index');
 
     Route::any('/ueupload', 'UeUploadController@index');
 });

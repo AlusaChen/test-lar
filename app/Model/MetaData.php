@@ -8,6 +8,8 @@ namespace App\Model;
  */
 trait MetaData
 {
+    public $meta_datas = [];
+
     /**
      * 设置key - value 并返回 meta_model 对象
      * @param $key
@@ -17,7 +19,7 @@ trait MetaData
     public function set_value_by_key($key, $value)
     {
         return $this->hasOne($this->meta_model, 'admin_id', 'id')
-            ->updateOrCreate(['mkey' => $key], ['mvalue' => $value]);
+            ->updateOrCreate(['mkey' => $key], ['mvalue' => serialize($value)]);
     }
 
     /**
@@ -38,6 +40,12 @@ trait MetaData
      */
     public function metadata()
     {
-        return $this->hasMany($this->meta_model, 'admin_id', 'id');
+        $datas =  $this->hasMany($this->meta_model, 'admin_id', 'id')->get();
+        $ret = [];
+        foreach($datas as $item)
+        {
+            $ret[$item->mkey] = unserialize($item->mvalue);
+        }
+        return $ret;
     }
 }

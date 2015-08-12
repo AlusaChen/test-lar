@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Admin\User;
+use App\Model\Term;
 use Validator;
 use Request;
 
@@ -68,5 +69,32 @@ class UserController extends Controller
         $user->save();
 
         return redirect()->action('Admin\UserController@index');
+    }
+
+    public function perm($id)
+    {
+        $user = User::find($id);
+        return view('user.perm', [
+            'user' => $user,
+        ]);
+    }
+
+    public function set_perm($id)
+    {
+        $user = User::find($id);
+
+        $validator = Validator::make(Request::all(), [
+            'perm' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $user->set_value_by_key('perm', Request::input('perm'));
+
+
+        return redirect()->action('Admin\UserController@index');
+
     }
 }

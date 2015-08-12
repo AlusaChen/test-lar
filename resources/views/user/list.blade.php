@@ -16,6 +16,7 @@
                 <td>{{ $user->name }}</td>
                 <td>
                     <a href="{{ url('admin/u/edit/'.$user->id) }}">编辑</a>
+                    <a href="{{ url('admin/u/perm/'.$user->id) }}">权限</a>
                 </td>
             </tr>
             @endforeach
