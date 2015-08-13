@@ -9,14 +9,18 @@ class Post extends Model
 {
     use MetaData;
 
+    protected $meta_model = 'App\Model\PostMeta';
+
+    protected $meta_id = 'post_id';
+
+    protected $local_id = 'id';
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'posts';
-
-    protected $meta_model = 'App\Model\PostMeta';
 
     //不允许操作的字段
     protected $guarded = ['id'];

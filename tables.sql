@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `terms` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `meta_terms` (
+CREATE TABLE IF NOT EXISTS `meta_term` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `term_id` bigint(20) UNSIGNED NOT NULL,
   `mkey` varchar(255)  NOT NULL,

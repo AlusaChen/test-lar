@@ -59,7 +59,13 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'm
         Route::get('/{type?}', 'TermController@index');
     });
 
-    //permission
+    //role
+    Route::group(['prefix' => 'r', 'as' => 'role'], function(){
+        Route::get('/', 'RoleController@index');
+        Route::get('/add', 'RoleController@add');
+        Route::post('/add', 'RoleController@store');
+    });
+
     Route::get('/perm/{uid?}', 'PermController@index');
 
     Route::any('/ueupload', 'UeUploadController@index');

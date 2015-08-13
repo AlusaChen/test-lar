@@ -17,14 +17,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     use MetaData;
 
+    protected $meta_model = 'App\Model\Admin\UserMeta';
+
+    protected $meta_id = 'admin_id';
+
+    protected $local_id = 'id';
+
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'admins';
-
-    protected $meta_model = 'App\Model\Admin\UserMeta';
 
     /**
      * The attributes that are mass assignable.
@@ -44,32 +49,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function has_permission($perm)
     {
         if($this->super_admin) return true;
-
+        $has_perms = $this->perm;
+        if(!$has_perms) $has_perms = [];
+        if(in_array($perm, $has_perms))
+            return true;
         return false;
     }
 
     public function has_role($role)
     {
         return true;
-    }
-
-    public function __get($key)
-    {
-        if(in_array($key, array_keys($this->attributes)))
-        {
-            return $this->attributes[$key];
-        }
-        else
-        {
-            if(!$this->meta_datas)
-            {
-                $this->meta_datas = $this->metadata();
-            }
-            if(array_key_exists($key, $this->meta_datas))
-                return $this->meta_datas[$key];
-            else
-                return null;
-        }
     }
 
 }

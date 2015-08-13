@@ -3,7 +3,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Admin\User;
-use App\Model\Term;
 use Validator;
 use Request;
 

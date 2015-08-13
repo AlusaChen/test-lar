@@ -20,6 +20,7 @@ class PermController extends Controller
         {
             $user = User::find($uid);
             $perm = $user->perm;
+            if(!$perm) $perm = [];
         }
         else
         {
@@ -31,10 +32,11 @@ class PermController extends Controller
         //print_this($perms);
         //print_this($perm);
 
-        return view('perm.list', [
+        return view('perm.perm', [
             'perms' => $perms,
             'has_perm' => $perm
         ]);
 
     }
+
 }

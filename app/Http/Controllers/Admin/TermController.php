@@ -37,7 +37,7 @@ class TermController extends Controller
 
         return view('term.add', [
             'term' => $term,
-            'terms' => $terms
+            'terms' => $terms,
         ]);
     }
 
@@ -78,6 +78,7 @@ class TermController extends Controller
         {
             $term = Term::find($id);
 
+            //检测类别 不能加到 不同的分类和子分类
             $terms = Term::get_item_by_type($term->type);
             $terms = array_assort($terms, 'id', 'pid', 0, $id);
 

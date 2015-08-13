@@ -23,8 +23,8 @@
 
     <li><a href="#">角色</a> </li>
     <ul>
-        <li><a href="{{ url('admin/t/role') }}">列表</a> </li>
-        <li><a href="{{ url('admin/t/add/role') }}">添加</a> </li>
+        <li><a href="{{ url('admin/r/') }}">列表</a> </li>
+        <li><a href="{{ url('admin/r/add') }}">添加</a> </li>
     </ul>
 
 

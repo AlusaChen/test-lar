@@ -41,7 +41,7 @@
 @section('other_js')
 <script type="text/javascript">
 $(function(){
-    $.get('{{ url('admin/perm') }}', function(data, status){
+    $.get('{{ url('admin/perm/'.$user->id) }}', function(data, status){
         if(status == 'success')
         {
             $('#perm-box').html(data);

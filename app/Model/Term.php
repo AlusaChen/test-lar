@@ -7,12 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Term extends Model
 {
 
+    use MetaData;
+
+    protected $meta_model = 'App\Model\TermMeta';
+
+    protected $meta_id = 'term_id';
+
+    protected $local_id = 'id';
+
     /**
      * The database table used by the model.
      *
      * @var string
      */
     protected $table = 'terms';
+
 
     protected $guarded = ['id'];
 
