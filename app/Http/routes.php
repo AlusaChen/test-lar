@@ -67,6 +67,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'm
     });
 
     Route::get('/perm/{uid?}', 'PermController@index');
+    Route::get('/perm/role/{rid}', 'PermController@role');
 
     Route::any('/ueupload', 'UeUploadController@index');
 });

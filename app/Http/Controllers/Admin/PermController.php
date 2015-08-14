@@ -39,4 +39,28 @@ class PermController extends Controller
 
     }
 
+    public function role($rid)
+    {
+        Debugbar::disable();
+
+        if($rid)
+        {
+            $role = Term::where('id', $rid)
+                ->where('type', 'role')
+                ->first();
+
+            $perm = $role->perm ?:[];
+        }
+        else
+        {
+            $perm = Term::get_item_by_type('permission');
+        }
+
+
+        return view('perm.perm', [
+            'perms' => $perm,
+            'has_perm' => []
+        ]);
+    }
+
 }
