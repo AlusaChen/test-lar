@@ -49,13 +49,13 @@ class PermController extends Controller
                 ->where('type', 'role')
                 ->first();
 
-            $perm = $role->perm ?:[];
+            $perm_id = $role->perm ?:[];
+            $perm = Term::whereIn('id', $perm_id)->get()->toArray();
         }
         else
         {
             $perm = Term::get_item_by_type('permission');
         }
-
 
         return view('perm.perm', [
             'perms' => $perm,

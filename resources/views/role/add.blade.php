@@ -65,14 +65,24 @@
 @endsection
 
 @section('other_js')
-    <script type="text/javascript">
-        $(function(){
-            $.get('{{ url('admin/perm/role/0') }}', function(data, status){
-                if(status == 'success')
-                {
-                    $('#perm-box').html(data);
-                }
-            });
-        });
-    </script>
+<script type="text/javascript">
+function get_perms(rid)
+{
+    var url = '{{ url('admin/perm/role/') }}'+'/'+rid;
+    $.get(url, function(data, status){
+        if(status == 'success')
+        {
+            $('#perm-box').html(data);
+        }
+    });
+}
+$(function(){
+    get_perms(0);
+    var rbox = $('#input-pid');
+    rbox.change(function(){
+        var rid = parseInt($(this).val());
+        get_perms(rid);
+    });
+});
+</script>
 @endsection
