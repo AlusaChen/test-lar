@@ -37,6 +37,16 @@ class RoleController extends Controller
         ]);
     }
 
+    public function edit($rid)
+    {
+        $role = Term::find($rid);
+        $terms = Term::get_item_by_type('role', 0, $rid);
+        return view('role.add', [
+            'role' => $role,
+            'terms' => $terms,
+        ]);
+    }
+
     public function store()
     {
         $validator = Validator::make(Request::all(), [

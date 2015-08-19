@@ -64,10 +64,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin::', 'namespace' => 'Admin', 'm
         Route::get('/', 'RoleController@index');
         Route::get('/add', 'RoleController@add');
         Route::post('/add', 'RoleController@store');
+        Route::get('/edit/{id}', 'RoleController@edit');
     });
 
     Route::get('/perm/{uid?}', 'PermController@index');
-    Route::get('/perm/role/{rid}', 'PermController@role');
+    Route::get('/perm/role/{rid}/{query_id?}', 'PermController@role');
 
     Route::any('/ueupload', 'UeUploadController@index');
 });

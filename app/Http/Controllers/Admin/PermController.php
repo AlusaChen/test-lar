@@ -39,9 +39,11 @@ class PermController extends Controller
 
     }
 
-    public function role($rid)
+    public function role($rid, $query_rid = 0)
     {
         Debugbar::disable();
+
+        $has_perm = [];
 
         if($rid)
         {
@@ -51,6 +53,15 @@ class PermController extends Controller
 
             $perm_id = $role->perm ?:[];
             $perm = Term::whereIn('id', $perm_id)->get()->toArray();
+            if($query_rid)
+            {
+                $query_role = Term::where('id', $query_rid)
+                    ->where('type', 'role')
+                    ->first();
+                $has_perm = $query_role->perm;
+            }
+
+            //$has_perm = $role->perm;
         }
         else
         {
@@ -59,7 +70,7 @@ class PermController extends Controller
 
         return view('perm.perm', [
             'perms' => $perm,
-            'has_perm' => []
+            'has_perm' => $has_perm,
         ]);
     }
 

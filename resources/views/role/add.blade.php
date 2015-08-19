@@ -11,7 +11,7 @@
             <label for="input-pid" class="col-sm-2 control-label">父级</label>
             <div class="col-sm-6">
                 <select class="form-control" id="input-pid" name="pid">
-                    <option>无</option>
+                    <option value="0">无</option>
                     @foreach($terms as $item)
                         <option value="{{ $item['id'] }}" {{ ($item['id'] == $role->pid)?'selected':'' }}>{{ str_replace('_','&nbsp;&nbsp;&nbsp;&nbsp;',str_pad('', substr_count($item['ptree'], '-'), '_')).$item['cname'] }}</option>
                     @endforeach
@@ -66,9 +66,9 @@
 
 @section('other_js')
 <script type="text/javascript">
-function get_perms(rid)
+function get_perms(rid, query_rid)
 {
-    var url = '{{ url('admin/perm/role/') }}'+'/'+rid;
+    var url = '{{ url('admin/perm/role/') }}'+'/'+rid+'/'+query_rid;
     $.get(url, function(data, status){
         if(status == 'success')
         {
@@ -77,11 +77,14 @@ function get_perms(rid)
     });
 }
 $(function(){
-    get_perms(0);
     var rbox = $('#input-pid');
+    var init_rid = parseInt(rbox.val());
+    var query_rid = '{{ $role->id }}';
+    if(!query_rid) query_rid = 0;
+    get_perms(init_rid, query_rid);
     rbox.change(function(){
         var rid = parseInt($(this).val());
-        get_perms(rid);
+        get_perms(rid, query_rid);
     });
 });
 </script>
